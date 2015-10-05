@@ -1,46 +1,49 @@
 <?php
-/*
-function get_key($fsize, $file){
-    if(!file_exists("TMPDIR"."TMPPRE".$file)){
-        touch("TMPDIR"."TMPPRE".$file);
-    }
-    $shmkey = @shmop_open(ftok("TMPDIR"."TMPPRE".$file, 'R'), "c", 0644, $fsize);
-    if(!$shmkey) {
-            return false;
-    }else{
-        return $shmkey;
-    }
+error_reporting(E_ALL);
+session_start();
+if(!array_key_exists('smHandle',$_SESSION)){
+	$_SESSION['smHandle']=shmop_open(0x3000,'a',0,0);
+	if ($_SESSION['smHandle']==False){
+		session_destroy();
+		die("control program is not running");
+	}
 }
- */
 
 echo
 "
 <!DOCTYPE HTML>
-<html>
+<html manifest='cache.manifest'>
 <head>
 </head>
 <style>
 </style>
 <body>
 ";
+$handle=shmop_open(0x3000,'a',0,0);
+$rv=shmop_read($handle,0,10);
+if ($rv[0]=="T"){
+	echo '<p>RED
+<svg width="100" height="100">
+<a xlink:href="http://www.google.com">
+	<circle cx="50" cy="50" r="30" stroke="black" stroke-width="1" fill="red">
+<a>
+</svg>
+';
+}else{echo '<p>not red
+<svg width="100" height="100">
+<a xlink:href="http://www.google.com">
+	<circle cx="50" cy="50" r="30" stroke="black" stroke-width="1" fill="gray">
+<a>
+</svg>
+';}
 
-$shm_key=242424;
-$shm_id=shmop_open($shm_key,'a',0,0);
-$rv=shmop_read($shm_id,0,4);
-if (!$rv){
-    echo "failed to read from shm_id".$shm_id;
-}
-else{
-    echo "the shared memory contains ".$rv;
-}
-shmop_close($shm_id);
-echo
-"
-<h1>here we go again</h>
-<h2>The shm key is ".$shm_key."</h>
-<h2>The shm id is ".$shm_id."</h>
-<h2>The rv is ".$rv[0]."</h>
-</body>
-</html>
-";
+if ($rv[1]=="T"){
+	echo '<p>YELLOW';
+}else{echo '<p>not yellow';}
+
+if ($rv[2]=="T"){
+	echo '<p>GREEN';
+}else{echo '<p>not green';}
+
+echo"<p><a href='logout.php'>Logout</a>";
 ?>
