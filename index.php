@@ -16,7 +16,7 @@ echo
 <!DOCTYPE HTML>
 <html manifest='cache.manifest'>
 <head>
-<meta http-equiv='refresh' content='10'>
+<meta http-equiv='refresh' content='1'>
 </head>
 <style>
 #tLightBox{
