@@ -21,7 +21,15 @@ echo
 <style>
 #tLightBox{
 	width : 100px;
-	height : 300px;
+	height : 250px;
+	float : left;
+	background-color : lightgray;
+}
+#ctrls{
+	width : 100px;
+	height : 250px;
+	float : left;
+	background-color : lightyellow;
 }
 </style>
 <body>
@@ -46,6 +54,32 @@ if(array_key_exists('c',$_GET)){
 			break;
 		case "rg":
 			$command="resetGreen\n";
+			break;
+		case "as":
+			$command="activateSequence\n";
+			break;
+		case "ds":
+			$command="deactivateSequence\n";
+			break;
+		default:
+			$command="unrecognizedGet\n";
+			break;
+	}
+	unset($_GET);
+	$out = fopen("/tmp/commandPipe","w");
+	fwrite($out,$command);
+	fclose($out);
+	header("Location: index.php");
+	exit();
+}
+if(array_key_exists('btn',$_GET)){
+	$command="";
+	switch ($_GET["btn"]){
+		case "as":
+			$command="activateSequence\n";
+			break;
+		case "ds":
+			$command="deactivateSequence\n";
 			break;
 		default:
 			$command="unrecognizedGet\n";
@@ -114,9 +148,27 @@ if ($rv[2]=="T"){
 		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="gray">
 		</a>
 		</svg>
-</div>
 	';
 }
 
-echo"<p><a href='logout.php'>Logout</a>";
+if ($rv[3]=="T"){
+	echo "
+		<div id='ctrls'>
+			<form action='index.php' method='get'>
+			    <button type='submit' name='btn' value='ds'>Deactivate Sequence</button>
+			</form>
+		</div>
+	";
+}else{
+	echo "
+		<div id='ctrls'>
+		    <form action='index.php' method='get' >
+		        <button type='submit' name='btn' value='as'>Activate Sequence</button>
+		    </form>
+		</div>
+	";
+}
+
+echo"<p><a href='logout.php'>Logout</a>
+";//id="frm1_submit" 
 ?>
