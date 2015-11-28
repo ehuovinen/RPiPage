@@ -95,61 +95,55 @@ if(array_key_exists('btn',$_GET)){
 
 $handle=shmop_open(0x3000,'a',0,0);
 $rv=shmop_read($handle,0,10);
+echo '	<div id="tLightBox">
+	<svg width="100" height="360">
+';
+
 if ($rv[0]=="T"){
 	echo '
-		<div id="tLightBox">
-		<svg width="100" height="80">
 		<a xlink:href="?c=rr">
 		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="red">
 		</a>
-		</svg>
 	';
 }else{
 	echo '
-		<div id="tLightBox">
-		<svg width="100" height="80">
 		<a xlink:href="?c=sr">
 		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="gray">
 		</a>
-		</svg>
 	';
 }
 
 if ($rv[1]=="T"){
 	echo '
-		<svg width="100" height="80">
 		<a xlink:href="?c=ry">
-		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="yellow">
+		<circle cx="50" cy="120" r="30" stroke="black" stroke-width="1" fill="yellow">
 		</a>
-		</svg>
 	';
 }else{
 	echo '
-		<svg width="100" height="80">
 		<a xlink:href="?c=sy">
-		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="gray">
+		<circle cx="50" cy="120" r="30" stroke="black" stroke-width="1" fill="gray">
 		</a>
-		</svg>
 	';
 }
 
 if ($rv[2]=="T"){
 	echo '
-		<svg width="100" height="80">
 		<a xlink:href="?c=rg">
-		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="lime">
+		<circle cx="50" cy="200" r="30" stroke="black" stroke-width="1" fill="lime">
 		</a>
-		</svg>
 	';
 }else{
 	echo '
-		<svg width="100" height="80">
 		<a xlink:href="?c=sg">
-		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="gray">
+		<circle cx="50" cy="200" r="30" stroke="black" stroke-width="1" fill="gray">
 		</a>
-		</svg>
 	';
 }
+
+echo '	</svg>
+	</div>
+';
 
 if ($rv[3]=="T"){
 	echo "
