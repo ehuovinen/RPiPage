@@ -19,20 +19,31 @@ echo
 <meta http-equiv='refresh' content='1'>
 </head>
 <style>
+#main{
+	width : 50%;
+	margin-left : auto;
+	margin-right : auto;
+}
+
 #tLightBox{
-	width : 100px;
-	height : 250px;
+	width : 50%;
 	float : left;
-	background-color : lightgray;
+	background-color : gray;
 }
 #ctrls{
-	width : 100px;
-	height : 250px;
+	width : 50%;
 	float : left;
 	background-color : lightyellow;
 }
+#ctrls button{
+	width : 100%;
+	height : 3em;
+	font-size : 40px;
+	
+}
 </style>
 <body>
+<div id='main'>
 ";
 if(array_key_exists('c',$_GET)){
 	$command="";
@@ -81,6 +92,12 @@ if(array_key_exists('btn',$_GET)){
 		case "ds":
 			$command="deactivateSequence\n";
 			break;
+		case "a1":
+			$command="turnOn\n";
+			break;
+		case "a0":
+			$command="turnOff\n";
+			break;
 		default:
 			$command="unrecognizedGet\n";
 			break;
@@ -96,7 +113,7 @@ if(array_key_exists('btn',$_GET)){
 $handle=shmop_open(0x3000,'a',0,0);
 $rv=shmop_read($handle,0,10);
 echo '	<div id="tLightBox">
-	<svg width="100" height="360">
+	<svg width="100%" height="100%" viewbox="0 0 100 240">
 ';
 
 if ($rv[0]=="T"){
@@ -108,7 +125,7 @@ if ($rv[0]=="T"){
 }else{
 	echo '
 		<a xlink:href="?c=sr">
-		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="gray">
+		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="lightgray">
 		</a>
 	';
 }
@@ -122,7 +139,7 @@ if ($rv[1]=="T"){
 }else{
 	echo '
 		<a xlink:href="?c=sy">
-		<circle cx="50" cy="120" r="30" stroke="black" stroke-width="1" fill="gray">
+		<circle cx="50" cy="120" r="30" stroke="black" stroke-width="1" fill="lightgray">
 		</a>
 	';
 }
@@ -136,33 +153,33 @@ if ($rv[2]=="T"){
 }else{
 	echo '
 		<a xlink:href="?c=sg">
-		<circle cx="50" cy="200" r="30" stroke="black" stroke-width="1" fill="gray">
+		<circle cx="50" cy="200" r="30" stroke="black" stroke-width="1" fill="lightgray">
 		</a>
 	';
 }
 
-echo '	</svg>
-	</div>
-';
+echo "
+</svg>
+</div>
+<div id='ctrls'>
+	<form action='index.php' method='get'>
+";
 
 if ($rv[3]=="T"){
 	echo "
-		<div id='ctrls'>
-			<form action='index.php' method='get'>
-			    <button type='submit' name='btn' value='ds'>Deactivate Sequence</button>
-			</form>
-		</div>
+		<button type='submit' name='btn' value='ds'>Deactivate Sequence</button>
 	";
 }else{
 	echo "
-		<div id='ctrls'>
-		    <form action='index.php' method='get' >
-		        <button type='submit' name='btn' value='as'>Activate Sequence</button>
-		    </form>
-		</div>
+		<button type='submit' name='btn' value='as'>Activate Sequence</button>
 	";
 }
 
-echo"<p><a href='logout.php'>Logout</a>
+echo"
+	<button type='submit' name='btn' value='a1'>All ON</button>
+	<button type='submit' name='btn' value='a0'>All OFF</button>
+	</form>
+</div>
+<p><a href='logout.php'>Logout</a>
 ";//id="frm1_submit" 
 ?>
