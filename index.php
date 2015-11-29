@@ -20,7 +20,7 @@ echo
 </head>
 <style>
 #main{
-	width : 50%;
+	width : 40%;
 	margin-left : auto;
 	margin-right : auto;
 }
@@ -123,19 +123,19 @@ $rv=shmop_read($handle,0,10);
 echo '	
 	<div id="title">group 12</br> Trafic Light</div>
 	<div id="tLightBox">
-	<svg width="100%" height="100%" viewbox="0 0 100 240">
+	<svg width="100%" height="100%" viewbox="0 0 70 175">
 ';
 
 if ($rv[0]=="T"){
 	echo '
 		<a xlink:href="?c=rr">
-		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="red">
+		<circle cx="35" cy="30" r="25" stroke="black" stroke-width="1" fill="red">
 		</a>
 	';
 }else{
 	echo '
 		<a xlink:href="?c=sr">
-		<circle cx="50" cy="40" r="30" stroke="black" stroke-width="1" fill="lightgray">
+		<circle cx="35" cy="30" r="25" stroke="black" stroke-width="1" fill="lightgray">
 		</a>
 	';
 }
@@ -143,13 +143,13 @@ if ($rv[0]=="T"){
 if ($rv[1]=="T"){
 	echo '
 		<a xlink:href="?c=ry">
-		<circle cx="50" cy="120" r="30" stroke="black" stroke-width="1" fill="yellow">
+		<circle cx="35" cy="85" r="25" stroke="black" stroke-width="1" fill="yellow">
 		</a>
 	';
 }else{
 	echo '
 		<a xlink:href="?c=sy">
-		<circle cx="50" cy="120" r="30" stroke="black" stroke-width="1" fill="lightgray">
+		<circle cx="35" cy="85" r="25" stroke="black" stroke-width="1" fill="lightgray">
 		</a>
 	';
 }
@@ -157,13 +157,13 @@ if ($rv[1]=="T"){
 if ($rv[2]=="T"){
 	echo '
 		<a xlink:href="?c=rg">
-		<circle cx="50" cy="200" r="30" stroke="black" stroke-width="1" fill="lime">
+		<circle cx="35" cy="140" r="25" stroke="black" stroke-width="1" fill="lime">
 		</a>
 	';
 }else{
 	echo '
 		<a xlink:href="?c=sg">
-		<circle cx="50" cy="200" r="30" stroke="black" stroke-width="1" fill="lightgray">
+		<circle cx="35" cy="140" r="25" stroke="black" stroke-width="1" fill="lightgray">
 		</a>
 	';
 }
