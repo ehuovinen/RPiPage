@@ -24,6 +24,14 @@ echo
 	margin-left : auto;
 	margin-right : auto;
 }
+#title{
+	width : 100%;
+	float : left;
+	font-size : 60px;
+	font-weight : bold;
+	text-align : center;
+	margin-bottom : 5px;
+}
 
 #tLightBox{
 	width : 50%;
@@ -112,7 +120,9 @@ if(array_key_exists('btn',$_GET)){
 
 $handle=shmop_open(0x3000,'a',0,0);
 $rv=shmop_read($handle,0,10);
-echo '	<div id="tLightBox">
+echo '	
+	<div id="title">group 12</br> Trafic Light</div>
+	<div id="tLightBox">
 	<svg width="100%" height="100%" viewbox="0 0 100 240">
 ';
 
@@ -180,6 +190,6 @@ echo"
 	<button type='submit' name='btn' value='a0'>All OFF</button>
 	</form>
 </div>
-<p><a href='logout.php'>Logout</a>
+<p><a href='diagram.png'>Diagram</a>
 ";//id="frm1_submit" 
 ?>
