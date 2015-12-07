@@ -190,6 +190,6 @@ echo"
 	<button type='submit' name='btn' value='a0'>All OFF</button>
 	</form>
 </div>
-<p><a href='diagram.png'>Diagram</a>
+<p><a href='diagram.html'>Diagram</a>
 ";//id="frm1_submit" 
 ?>
